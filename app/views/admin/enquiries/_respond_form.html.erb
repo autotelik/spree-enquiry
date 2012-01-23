@@ -1,0 +1,21 @@
+<div class="yui-u">
+  <fieldset>
+    <legend>Response</legend>
+    <div id="enquiry_response">
+      <%= text_area :response, :body, {:cols => 60, :rows => 2, :class => 'fullwidth'} %>
+    </div>
+    <p>
+      <%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
+
+      <%=  link_to_remote( icon('email') + ' ' + t('send_response'),
+        :submit => "enquiry_response",
+        :url => { :controller => :enquiry_responses, :action => :create, :enquiry_id => @enquiry },
+        :method => :post,
+        :before =>   "jQuery('#busy_indicator').show();",
+        :complete => "jQuery('#busy_indicator').hide();alert('Email sent')",
+        :confirm => "Are you sure you want to send email ?"
+      )
+    %>
+    </p>
+  </fieldset>
+</div>

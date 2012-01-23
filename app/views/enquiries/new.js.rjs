@@ -1,0 +1,3 @@
+page[:enquiry_place_holder].replace_html :partial => "new"
+page.call 'set_default_session_radio'
+page.call 'scroll_enquiry_into_view'

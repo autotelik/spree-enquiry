@@ -1,0 +1,13 @@
+<%= error_messages_for :enquiry %>
+
+<% form_for :enquiry, :url => new_enquiry_url do |f| %>
+  <div id="product_enquiry">
+    <%= f.hidden_field :product_id, :value => @product.id -%>
+  </div>
+  <div id='new_enquiry'>
+    <%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
+    <p class="form-buttons">
+    <%= button( icon('broadcast_navy_16') + ' ' + t("enquiry")) %> <p><%=link_to t("continue_shopping"), products_path %></p>
+  </p>
+  </div>
+<% end  %>

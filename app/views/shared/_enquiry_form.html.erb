@@ -1,0 +1,18 @@
+<%= error_messages_for :enquiry %>
+
+<% if @product %>
+  <input name="product_enquiry" value="<%=@product.id -%>" type="hidden" />
+
+  <%= button_link_to_remote icon('enquiry/send_mail_icon') + ' ' + t("enquiry"),
+    :submit => "product_enquiry",
+    :method => 'get',
+    :url => new_product_enquiry_url( @product.id ) %>
+
+<% else %>
+
+  <%= button_link_to_remote icon('enquiry/send_mail_icon') + ' ' + t("enquiry"),
+    :submit => "product_enquiry",
+    :method => 'get',
+    :url => new_enquiry_url() %>
+
+<% end  %>

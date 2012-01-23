@@ -1,0 +1,66 @@
+<h1><%= t("listing_enquiries") %></h1>
+
+<table class="index">
+  <thead>
+  <th><%= order @search, :by => :id, :as => t("id") %></th>
+  <th><%= order @search, :by => :customer_company_name, :as => t("company") %></th>
+  <th><%= order @search, :by => :customer_firstname, :as => t("first_name") %></th>
+  <th><%= order @search, :by => :customer_lastname, :as => t("last_name") %></th>
+  <th><%= order @search, :by => :customer_user_email, :as => t("email") %></th>
+  <th><%= order @search, :by => :message, :as => t("message") %></th>
+  <th><%= order @search, :by => :created_at, :as => t('spree.date') %></th>
+  <th><%= t("action") %></th>
+</thead>
+<tbody>
+  <%- @collection.each do |enquiry|%>
+    <tr id="<%= dom_id(enquiry)%>" >
+      <td width="24px"><%= enquiry.id %></td>
+      <td><%= enquiry.company_name %></td>
+      <td width="80px"><%= enquiry.firstname %></td>
+      <td width="80px"><%= enquiry.lastname %></td>
+      <td><%= enquiry.email %></td>
+      <td><%= enquiry.message %></td>
+      <td width="80px"><%= enquiry.created_at.to_date %></td>
+      <td class="actions" width="130px">
+        <%= link_to_edit enquiry -%>&nbsp;<%= link_to_delete enquiry %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<%= will_paginate(:prev => "&#171; #{t('previous')}", :next => "#{t('next')} &#187;") %>
+<% content_for :sidebar do %>
+  <% form_for @search do |f| %>
+    <div class="box">
+      <h3><%= t(:search) %></h3>
+      <div class="yui-g" id="status_choice">
+        <div><%= radio_button_tag "search[status]", "all", (@current_status == 'all') -%> ALL</div>
+        <div><%=  radio_button_tag "search[status]", "responded", (@current_status == 'responded') %> Responded</div>
+        <div class="sub-field"><%=  radio_button_tag "search[status]", "awaiting_response", (@current_status == 'awaiting_response') %> Awaiting Response</div>
+      </div>
+      <p>
+        <label><%= t("message") %></label><br/>
+        <%= f.text_field :message_contains, :size=> 20 %>
+      </p>
+      <p>
+        <label><%= t("company") %></label><br/>
+        <%= f.text_field :customer_company_name_contains, :size=> 20 %>
+      </p>
+      <p>
+        <label><%= t("email") %></label><br/>
+        <%= f.text_field :customer_user_email_contains, :size=> 20 %>
+      </p>
+      <p>
+        <label><%= t("first_name") %></label><br/>
+        <%= f.text_field :customer_firstname_contains, :size => 20 %>
+      </p>
+      <p>
+        <label><%= t("last_name") %></label><br/>
+        <%= f.text_field :customer_lastname_contains, :size => 20 %>
+      </p>
+      <p><%= button t("search") %></p>
+    </div>
+  <% end %>
+<% end %>
+
+

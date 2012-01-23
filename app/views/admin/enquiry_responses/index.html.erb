@@ -1,0 +1,38 @@
+<h1><%= t("listing_enquiry_responses") %></h1>
+
+<table class="index">
+  <thead>
+  <th><%= order @search, :by => :enquiry, :as => (t("enquiry") + ' ID')%></th>
+  <th><%= order @search, :by => :message, :as => t("response") %></th>
+  <th><%= t("date_sent") %></th>
+  <th><%= t("action") %></th>
+</thead>
+<tbody>
+  <%- @collection.each do |response|%>
+    <tr id="<%= dom_id(response)%>" >
+      <td><%= link_to response.enquiry.id, admin_enquiry_url(response.enquiry) %></td>
+      <td><%= response.message %></td>
+      <td><%= response.created_at.to_date%></td>
+      <td class="actions" width="130px">
+        <%= link_to_edit response %> &nbsp;
+        <%= link_to_delete response %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<%= will_paginate(:prev => "&#171; #{t('previous')}", :next => "#{t('next')} &#187;") %>
+<% content_for :sidebar do %>
+  <% form_for @search do |f| %>
+    <div class="box">
+      <h3><%= t(:search) %></h3>
+      <label><%= t("enquiry") %></label><br/>
+        <%= f.text_field :id_equals, :size=> 5 %>
+      <p>
+        <label><%= t("message") %></label><br/>
+        <%= f.text_field :message_contains, :size=> 20 %>
+      </p>
+      <p><%= button t("search") %></p>
+    </div>
+  <% end %>
+<% end %>

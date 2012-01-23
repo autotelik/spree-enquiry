@@ -1,0 +1,24 @@
+<fieldset>
+  <legend>To enable us to respond to your enquiry please provide the following:</legend>
+  </br>
+  <p>
+    <% fields_for :user do |user_form| %>
+      <%= user_form.label :email, t("email") %><br />
+      <%= user_form.text_field :email  %>
+    <% end %>
+  </p>
+  <% fields_for :customer do |cust_form| %>
+    <div>
+      <%= cust_form.label :firstname, t("first_name") %><br />
+      <%= cust_form.text_field :firstname, :class => 'fullwidth' %>
+    </div>
+    <div>
+      <%= cust_form.label :lastname, t("last_name") %><br />
+      <%= cust_form.text_field :lastname, :class => 'fullwidth' %>
+    </div>
+    <div class="sub-field">
+      <%= cust_form.label :company_name, t("company") %><br />
+      <%= cust_form.text_field :company_name, :class => 'fullwidth' %>
+    </div>
+  <% end %>
+</fieldset>

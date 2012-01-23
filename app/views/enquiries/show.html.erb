@@ -1,0 +1,11 @@
+<div id='enquiry_show'>
+  <% @body_id = 'enquiry' %>
+  <h3>Thankyou for your enquiry.</h3>
+  <p><b>Product:</b></p>
+    <%= link_to(@enquiry.product.name, @enquiry.product)%></p>
+    <hr>
+    <p><b>Ref:</b> <%= @enquiry.id %></p>
+    <p><b>Message:</b> <%= @enquiry.message %></p>
+    <hr>
+  <p><%=link_to t("home"), root_url %></p>
+</div>

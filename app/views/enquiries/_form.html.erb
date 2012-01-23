@@ -1,0 +1,22 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'user_session' %>
+<% end %>
+
+<% unless current_user %>
+  <%= render :partial => 'shared/user_choice_form' %>
+<% end %>
+<p>
+</p>
+<% url = @product ? product_enquiries_path(@product) : enquiries_path %>
+<% form_for :enquiry, :url => url, :html => {:id => 'enquiry_form'} do |f| %>
+  <fieldset>
+    <legend><%= t('enquiry_message') %></legend>
+  <div class="yui-u sub-field first">
+    <%= f.text_area :message, {:cols => 60, :rows => 8} %>
+    <%= f.error_message_on :message %>
+  </div
+  </fieldset>
+<p>
+  <%= submit_tag t("send"), :class => 'button_green' %>
+</p>
+<% end %>

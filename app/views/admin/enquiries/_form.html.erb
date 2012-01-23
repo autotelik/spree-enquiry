@@ -1,0 +1,24 @@
+<div class="yui-u first">
+  <fieldset>
+    <legend><%= link_to @enquiry.product.name, @enquiry.product %></legend>
+
+    <%= t("first_name") -%>:<b><%= @enquiry.customer.firstname  %></b></br>
+    <%= t("last_name") -%> :<b><%= @enquiry.customer.lastname  %></b></br>
+    <p>
+    <%= t("company") -%> :<b><%= @enquiry.customer.company_name  %></b></br>
+    <%= t("email") -%> :<b><%= @enquiry.customer.email  %></b></br>
+    
+    <%= link_to t("responses"), admin_enquiry_responses_url -%>:
+    <b><%= @enquiry.responses.size  %></b></br>
+
+    </p>
+    <p>
+    <legend>Message</legend>
+    <%= f.text_area :message, {:cols => 30, :rows => 2, :class => 'fullwidth'} %>
+    <%= f.error_message_on :message %>
+    </p>
+    <p class="form-buttons">
+      <%= button t("update") %> <%= link_to t('cancel'), collection_url %>
+    </p>
+  </fieldset>
+</div>

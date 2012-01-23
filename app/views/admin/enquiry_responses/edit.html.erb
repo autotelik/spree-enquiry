@@ -1,0 +1,14 @@
+<%= error_messages_for :enquiry %>
+<%= error_messages_for :customer, :object => @enquiry.customer %>
+
+<% @body_id = 'enquiry' %>
+
+<div id="create_enquiry_response">
+  <h1><%= t("create_enquiry_response") %></h1>
+  <div class="yui-g">
+    <% form_for(@enquiry, :url => object_url, :html => { :method => :put }) do |f| %>
+      <%= render :partial => "form", :locals => { :f => f, } %>
+    <% end %>
+    <%= render :partial => "respond_form" %>
+  </div>
+</div>

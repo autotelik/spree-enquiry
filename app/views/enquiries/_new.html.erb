@@ -1,0 +1,14 @@
+<%= error_messages_for :enquiry %>
+<%= error_messages_for :customer, :object => @enquiry.customer if @enquiry %>
+
+<% @body_id = 'enquiry' %>
+
+<div id="new-enquiry">
+  <% if  @enquiry.product %>
+    <h2><%= t("enquiry_on_product") + ': ' + @enquiry.product.name %></h2>
+  <%  else %>
+    <h2><%= t("contact") + ': ' %></h2>
+  <% end %>
+
+  <%= render :partial => "form" %>
+</div>
